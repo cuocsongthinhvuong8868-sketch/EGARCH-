@@ -46,14 +46,19 @@ def load_data(tickers, days=1095): # Tải hẳn 3 năm (1095 ngày) cho thoải
     all_data = []
     
     # 2.1 Tải VN-Index
-    try:
+   try:
         quote_vnindex = Quote(symbol='VNINDEX', source='KBS')
         df_vnindex = quote_vnindex.history(start=start_date, end=end_date, interval='1D')
         df_vnindex = df_vnindex[['time', 'close']].rename(columns={'close': 'VNINDEX'}).set_index('time')
         
-        # CHUẨN HÓA INDEX: Cắt bỏ giờ phút giây và Timezone, chỉ giữ lại Ngày (YYYY-MM-DD)
+        # CHUẨN HÓA INDEX
         df_vnindex.index = pd.to_datetime(df_vnindex.index).normalize().tz_localize(None)
+        
+        # ---> DÒNG CẦN THÊM VÀO: Vá lỗi Duplicate Index của VN-Index <---
+        df_vnindex = df_vnindex[~df_vnindex.index.duplicated(keep='first')]
+        
         all_data.append(df_vnindex)
+        print("   -> VNINDEX: OK")
     except Exception as e:
         st.error(f"❌ Lỗi tải VNINDEX: {e}")
         return None, None
