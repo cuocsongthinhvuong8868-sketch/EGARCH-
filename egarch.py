@@ -42,7 +42,7 @@ def load_data(tickers, days=1095): # Tải hẳn 3 năm (1095 ngày) cho thoải
     
     # 2.1 Tải VN-Index
     try:
-        quote_vnindex = Quote(symbol='VNINDEX', source='VCI')
+        quote_vnindex = Quote(symbol='VNINDEX', source='KBS')
         df_vnindex = quote_vnindex.history(start=start_date, end=end_date, interval='1D')
         df_vnindex = df_vnindex[['time', 'close']].rename(columns={'close': 'VNINDEX'}).set_index('time')
         
@@ -61,7 +61,7 @@ def load_data(tickers, days=1095): # Tải hẳn 3 năm (1095 ngày) cho thoải
     for i, symbol in enumerate(tickers):
         try:
             status_text.text(f"Đang tải: {symbol} ({i+1}/{len(tickers)})")
-            quote = Quote(symbol=symbol, source='VCI')
+            quote = Quote(symbol=symbol, source='KBS')
             df = quote.history(start=start_date, end=end_date, interval='1D')
             
             if df is not None and not df.empty:
