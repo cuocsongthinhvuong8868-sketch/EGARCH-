@@ -266,7 +266,7 @@ if df_vnindex is not None and df_stocks is not None:
     
     # --- PHẦN 1: ĐỒNG HỒ ĐO ĐIỂM RỦI RO (GAUGE CHART & TREND) ---
     latest_date_str = scored_df.index[-1].strftime("%d/%m/%Y")
-    st.markdown(f"### 🚦 Market Risk Score (Cập nhật chốt phiên: **{latest_date_str}**)")
+    st.markdown(f"### 🚦Fear & Greed Score (Cập nhật chốt phiên: **{latest_date_str}**)")
     
     col1, col2 = st.columns([1, 2])
     
