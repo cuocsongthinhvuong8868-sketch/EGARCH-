@@ -15,7 +15,7 @@ os.environ['VNSTOCK_API_KEY'] = 'vnstock_17b56a86b930db526e25e8de447a0bfd'
 from vnstock import Quote
 
 # Cấu hình trang Streamlit
-st.set_page_config(page_title="Hệ thống Quant - Phân rã Rủi ro", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="VN-Index Fear & Greed Score", layout="wide", initial_sidebar_state="expanded")
 
 # ================= HÀM TẢI DỮ LIỆU =================
 @st.cache_data(ttl=86400, show_spinner=False)
@@ -238,7 +238,7 @@ st.sidebar.title("Cài đặt Hệ thống")
 if st.sidebar.button("🔄 Cập nhật Dữ liệu EOD", use_container_width=True):
     st.cache_data.clear()
 
-st.title("🎯 HỆ THỐNG PHÂN RÃ RỦI RO THỊ TRƯỜNG")
+st.title("🎯 VN-Index Fear & Greed Score")
 st.markdown("*Nhận diện dòng tiền Hoảng loạn (Panic Sell), Hưng phấn (FOMO) và Môi trường Stock Picking.*")
 
 # Đọc danh sách 200 mã
