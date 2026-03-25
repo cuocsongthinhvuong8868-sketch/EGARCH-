@@ -235,8 +235,20 @@ def calculate_risk_score(metrics_df):
 
 # ================= GIAO DIỆN STREAMLIT =================
 st.sidebar.title("Cài đặt Hệ thống")
+
 if st.sidebar.button("🔄 Cập nhật Dữ liệu EOD", use_container_width=True):
+    # 1. Xóa Cache trên RAM của Streamlit
     st.cache_data.clear()
+    
+    # 2. Tiêu hủy file Cache cứng trên ổ đĩa
+    cache_file = "quant_risk_cache.csv"
+    if os.path.exists(cache_file):
+        os.remove(cache_file)
+        
+    # 3. Báo cáo và tự động Refresh lại trang web
+    st.sidebar.success("Đã xóa dữ liệu cũ! Đang tiến hành tải lại từ API...")
+    time.sleep(1) # Dừng 1 giây cho bạn kịp đọc thông báo
+    st.rerun() # Ép Streamlit tải lại toàn bộ app từ đầu
 
 st.title("🎯 VN-Index Fear & Greed Score")
 st.markdown("*Nhận diện dòng tiền Hoảng loạn (Panic Sell), Hưng phấn (FOMO) và Môi trường Stock Picking.*")
