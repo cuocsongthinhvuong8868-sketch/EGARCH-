@@ -1,0 +1,10 @@
+streamlit
+pandas
+numpy
+plotly
+scikit-learn
+tensorflow
+yfinance
+vnstock
+arch
+time
